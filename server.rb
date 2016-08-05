@@ -4,6 +4,10 @@ require "json"
 class ThermostatAPI < Sinatra::Base
   set :public_folder, proc { File.join(root) }
 
+  @@temperature = 20
+  @@powersaving = "true"
+  @@city = "London"
+  
   get '/time' do
     response = {
       time: Time.now.to_s,

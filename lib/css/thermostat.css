@@ -31,9 +31,13 @@ body {
 }
 
 .power-saving-off {
-  color: red
+  color: red;
 }
 
+.degree {
+  color: grey;
+  font-size: 60px;
+}
 
 .divider{
     width:30px;
