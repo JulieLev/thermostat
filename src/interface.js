@@ -16,6 +16,7 @@ $( document ).ready(function() {
     event.preventDefault();
     var city = $("#current-city").val();
     displayWeather(city);
+    $.post("http://localhost:4567/city", {city: city});
   });
 
   function updateTemperature(){
@@ -25,7 +26,25 @@ $( document ).ready(function() {
   }
 
   thermostat = new Thermostat();
-  updateTemperature();
+    $.getJSON("http://localhost:4567/data", function(data){
+      console.log(data);
+      thermostat.temperature = data.temp;
+      $('#temperature').text(thermostat.temperature) + "˚C";
+      $('#temperature').attr('class', thermostat.EnergyUsage());
+
+      if (data.psmode === "true") {
+        thermostat.switchPowerSavingModeOn();
+        $('#power-saving-status').text('ON');
+        $('#power-saving-status').attr('class', thermostat.PowerSaving());
+      } else {
+        thermostat.switchPowerSavingModeOff();
+        $('#power-saving-status').text('OFF');
+        $('#power-saving-status').attr('class', thermostat.PowerSaving());
+      }
+
+      $("#current-city").val(data.city);
+      displayWeather(data.city)
+    })
 
   $('#temp-up').on('click', function(){
     thermostat.up();

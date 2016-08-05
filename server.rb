@@ -12,6 +12,15 @@ class ThermostatAPI < Sinatra::Base
     response.to_json
   end
 
+  get '/data' do
+    response = {
+      temp: @@temperature,
+      psmode: @@powersaving,
+      city: @@city
+    }
+    response.to_json
+  end
+
   post '/temperature' do
     p params
     @@temperature = params[:temp]
@@ -21,6 +30,12 @@ class ThermostatAPI < Sinatra::Base
   post '/powersaving' do
     p params
     @@powersaving = params[:psmode]
+    "OK"
+  end
+
+  post '/city' do
+    p params
+    @@city = params[:city]
     "OK"
   end
 
