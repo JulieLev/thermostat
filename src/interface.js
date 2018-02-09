@@ -43,8 +43,8 @@ $( document ).ready(function() {
       }
 
       $("#current-city").val(data.city);
-      displayWeather(data.city)
-    })
+      displayWeather(data.city);
+    });
 
   $('#temp-up').on('click', function(){
     thermostat.up();

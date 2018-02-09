@@ -7,7 +7,7 @@ class ThermostatAPI < Sinatra::Base
   @@temperature = 20
   @@powersaving = "true"
   @@city = "London"
-  
+
   get '/time' do
     response = {
       time: Time.now.to_s,
